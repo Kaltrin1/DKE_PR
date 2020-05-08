@@ -33,19 +33,19 @@ public class jena {
 		model.setNsPrefixes(map);
 		
 		model.setNsPrefix("theater", uri);
-		Resource r = model.createResource(uri + "theaterstueck");
+		Resource r = model.createResource(uri + "Theaterstueck");
 		Property p = model.createProperty(uri + "name");
 		Property musik = model.createProperty(uri + "musik");
-		Literal l = model.createLiteral("orchester");
+		Literal l = model.createLiteral("Orchester");
 		
-		model.setNsPrefix("vor", uri);
+		model.setNsPrefix("test", uri);
 		Resource stueck = model.createResource(uri + "Vorstellung")
 				.addProperty(model.createProperty(uri + "zugabe"), "19.06.2002", XSDDateType.XSDdate);
 		
 		r.addLiteral(musik, l);
 		r.addProperty(p, "Nathan der Weise", XSDDatatype.XSDstring);
 		
-		model.write(System.out, "RDF/XML");
+		model.write(System.out, "Turtle");
 		
 		
 	}
