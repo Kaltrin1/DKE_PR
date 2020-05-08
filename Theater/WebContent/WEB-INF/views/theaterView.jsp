@@ -22,7 +22,7 @@
          <li>Edit Product</li>
          <li>Delete Product</li>
       </ul>
- 
+      
      <jsp:include page="_footer.jsp"></jsp:include>
  
   </body>
