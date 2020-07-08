@@ -4,6 +4,7 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlNs;
 
 import org.apache.jena.datatypes.xsd.XSDDatatype;
+import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.datatypes.xsd.impl.XSDDateType;
 import org.apache.jena.iri.impl.Main;
 import org.apache.jena.rdf.model.Literal;
@@ -11,6 +12,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.util.FileManager;
 public class jena {
 	
@@ -19,33 +21,35 @@ public class jena {
 		
 		
 		String uri = "http://theater.com/";
+		String vor = "http://theater.com/Vorstellung";
 		//FileManager.get().addLocatorClassLoader(Main.class.getClassLoader());
 		//Model model = FileManager.get().loadModel(uri);
 		
 		Model model = ModelFactory.createDefaultModel();
 		
-		Map<String, String> map = new HashMap();
-		
-		map.forEach(
-				(x,y) -> map.put(x, y)
-				);
-		
-		model.setNsPrefixes(map);
 		
 		model.setNsPrefix("theater", uri);
-		Resource r = model.createResource(uri + "Theaterstueck");
-		Property p = model.createProperty(uri + "name");
-		Property musik = model.createProperty(uri + "musik");
-		Literal l = model.createLiteral("Orchester");
+		model.setNsPrefix("vorstellung", vor);
 		
-		model.setNsPrefix("test", uri);
-		Resource stueck = model.createResource(uri + "Vorstellung")
-				.addProperty(model.createProperty(uri + "zugabe"), "19.06.2002", XSDDateType.XSDdate);
+		Resource r = model.createResource(uri + "Theaterstueck")
+				.addProperty(model.createProperty(uri + "name"), "Nathan der Weise", XSDDatatype.XSDstring)
+				.addProperty(model.createProperty(uri + "musik"), "Orchester")
+				.addProperty(model.createProperty(uri + "inszinierung"), "Herbert Trattner", XSDDatatype.XSDstring)
+				.addProperty(model.createProperty(uri + "kurzbeschreibung"), "Nathan, ein reicher" + 
+						"juedischer Kaufmann, kommt von einer Geschaeftsreise zurueck."
+						+ "Er erfaehrt, dass es zu einem Brand in seinem Haus kam. \n Ein christlicher Tempelherr habe seine Tochter Recha" + 
+						"gerettet. Nathan hoert, dass jener Ordensritter sein Leben dem Sultan verdanke.", XSDDatatype.XSDstring);
 		
-		r.addLiteral(musik, l);
-		r.addProperty(p, "Nathan der Weise", XSDDatatype.XSDstring);
 		
-		model.write(System.out, "Turtle");
+		Resource stueck = model.createResource(vor)
+				.addProperty(model.createProperty(vor + "vorstellungsdatum"), "19.06.2002", XSDDateType.XSDdate)
+				.addProperty(model.createProperty(vor + "beginn"), "15:00")
+				.addProperty(model.createProperty(vor, "ausverkauft"), 
+						model.createResource(vor + "/Ausverkauft").addProperty(model.createProperty(uri, "ja"), "Ja")
+												.addProperty(model.createProperty(uri, "nein"), "Nein"));
+		
+		
+		model.write(System.out, "RDF/XML");
 		
 		
 	}
