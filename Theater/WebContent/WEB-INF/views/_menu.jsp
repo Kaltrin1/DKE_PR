@@ -6,7 +6,7 @@
  
    <a href="${pageContext.request.contextPath}/">Theater</a>
    |
-   <a href="${pageContext.request.contextPath}/productList">Vorstellungen</a>
+   <a href="${pageContext.request.contextPath}/theaterstueck">Theaterstücke</a>
    |
    <a href="${pageContext.request.contextPath}/userInfo">Karte kaufen</a>
    

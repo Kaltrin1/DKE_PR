@@ -13,16 +13,15 @@
     
       <h3>Theater Wien</h3>
       
-      <b>It includes the following functions:</b>
+      <b>Folgende Funktionen werden bereitgestellt:</b>
       <ul>
-         <li>Login</li>
-         <li>Storing user information in cookies</li>
-         <li>Product List</li>
-         <li>Create Product</li>
-         <li>Edit Product</li>
-         <li>Delete Product</li>
+         <li>Home</li>
+         <li>Theater Liste</li>
+         <li>Theaterstück reservieren</li>
+         <li>Karte ansehen</li>
+         <li>Karte löschen</li>
       </ul>
- 
+      
      <jsp:include page="_footer.jsp"></jsp:include>
  
   </body>
