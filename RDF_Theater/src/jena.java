@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,14 +43,36 @@ public class jena {
 		
 		
 		Resource stueck = model.createResource(vor)
-				.addProperty(model.createProperty(vor + "vorstellungsdatum"), "19.06.2002", XSDDateType.XSDdate)
+				.addProperty(model.createProperty(vor + "vorstellungsdatum"), "19.06.2019", XSDDateType.XSDdate)
 				.addProperty(model.createProperty(vor + "beginn"), "15:00")
 				.addProperty(model.createProperty(vor, "ausverkauft"), 
 						model.createResource(vor + "/Ausverkauft").addProperty(model.createProperty(uri, "ja"), "Ja")
 												.addProperty(model.createProperty(uri, "nein"), "Nein"));
 		
 		
-		model.write(System.out, "RDF/XML");
+		Resource sitz = model.createResource(vor)
+				.addProperty(model.createProperty(uri + "sitznr"), "15")
+				.addProperty(model.createProperty(uri + "reihenr"), "11");
+				
+		
+		Resource saal = model.createResource(vor)
+				.addProperty(model.createProperty(uri + "sitzAnz"), "362")
+				.addProperty(model.createProperty(uri + "saalBez"), "Burgsaal")
+				.addProperty(model.createProperty(uri + "saalnr"), "15");
+		
+		
+		Resource preisklasse = model.createResource(vor)
+				.addProperty(model.createProperty(uri + "klasse"), "1");
+		
+		Resource saison = model.createResource(vor)
+				.addProperty(model.createProperty(uri + "saison"), "Winter");
+		
+		
+		Resource karte = model.createResource(vor)
+				.addProperty(model.createProperty(uri + "kartenr"), "15664")
+				.addProperty(model.createProperty(uri + "austelldatum"), "15.02.2019", XSDDateType.XSDdate);
+		
+		model.write(System.out, "Turtle");
 		
 		
 	}
